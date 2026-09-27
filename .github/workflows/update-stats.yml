@@ -1,54 +1,42 @@
-# name: Update Gaza Statistics
+name: Update Gaza Statistics
 
-# on:
-#   schedule:
-#     - cron: '0 * * * *'  # Every hour
-#   workflow_dispatch:  # Allow manual trigger
-#   # push:
-#   #   branches: [ main ]
-#   #   paths-ignore:
-#   #     - 'README.md'
+on:
+  schedule:
+    - cron: '17 * * * *'  # Every hour at :17
+  workflow_dispatch:      # Allow manual trigger
 
-# permissions:
-#   contents: write
-#   pull-requests: write
+permissions:
+  contents: write
 
-# jobs:
-#   update-stats:
-#     runs-on: ubuntu-latest
-    
-#     steps:
-#     - name: Checkout repository
-#       uses: actions/checkout@v4
-#       with:
-#         token: ${{ secrets.PAT_TOKEN }}
-        
-#     - name: Set up Python
-#       uses: actions/setup-python@v4
-#       with:
-#         python-version: '3.11'
-        
-#     - name: Install dependencies
-#       run: |
-#         python -m pip install --upgrade pip
-#         pip install requests beautifulsoup4
-        
-#     - name: Fetch latest statistics
-#       run: |
-#         python fetch_statistics.py
-        
-#     - name: Update README badges
-#       run: |
-#         python scripts/update_badges.py
-        
-#     - name: Commit and push changes
-#       run: |
-#         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-#         git config --local user.name "github-actions[bot]"
-#         git add .
-#         git diff --quiet && git diff --staged --quiet || (git commit -m "Update Gaza statistics - $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)
-        
-#     - name: Create release if major update
-#       if: github.event_name == 'workflow_dispatch'
-#       run: |
-#         echo "Manual update completed"
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Fetch latest statistics
+      run: |
+        python fetch_statistics.py
+
+    - name: Update README badges
+      run: |
+        python scripts/update_badges.py
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add data/latest_stats.json README.md
+        git diff --quiet --staged || (git commit -m "Update Gaza statistics - $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)

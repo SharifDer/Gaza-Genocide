@@ -1,199 +1,152 @@
 #!/usr/bin/env python3
 """
-Fetch latest Gaza statistics from verified sources
-Updated with real data sources and comprehensive statistics
+Fetch the latest Gaza casualty statistics from the Tech for Palestine
+"Palestine Datasets" API (https://data.techforpalestine.org).
+
+The API aggregates the daily casualty reports published by the Gaza
+Ministry of Health (via Telegram) and cross-references them with UN OCHA
+figures. It is updated daily and is the most reliable machine-readable
+source available for these numbers.
+
+Endpoints used:
+  - https://data.techforpalestine.org/api/v3/summary.json
+      Latest cumulative values (killed, injured, children, women, press,
+      medical staff, civil defence, massacres) for Gaza, the West Bank
+      and Lebanon, plus the known-by-name victim list summary.
+
+Figures that are NOT available from this API (displacement, hospital
+functionality, food insecurity) are kept as manually-maintained values in
+MANUAL_FIGURES below, sourced from UN OCHA flash updates. Update them
+from https://www.ochaopt.org/ when newer figures are published.
+
+If the API is unreachable, the previously saved data/latest_stats.json is
+kept untouched so the repository never regresses to fabricated numbers.
 """
 
 import json
-import requests
-from datetime import datetime, timedelta
 import os
-import time
-from bs4 import BeautifulSoup
-import re
+import sys
+from datetime import datetime
 
-def fetch_gaza_ministry_stats():
-    """
-    Fetch statistics from Gaza Ministry of Health and other verified sources
-    """
-    try:
-        # Real data sources - Gaza Ministry of Health and humanitarian organizations
-        stats = {
-        "total_deaths": "54,084+",
-        "children_deaths": "16,854+",
-        "women_deaths": "Not separately published",
-        "total_injured": "123,308+",
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M UTC"),
-        "source": "Gaza Ministry of Health (cumulative to May 28, 2025)"
+import requests
+
+SUMMARY_URL = "https://data.techforpalestine.org/api/v3/summary.json"
+DATA_FILE = "data/latest_stats.json"
+REQUEST_TIMEOUT = 30
+
+# Figures NOT exposed by the API. Sourced from UN OCHA Gaza flash updates
+# (https://www.ochaopt.org/). Update manually when OCHA publishes new ones.
+MANUAL_FIGURES = {
+    "displaced_people": "1.9M+",          # ~90% of population, per UN OCHA
+    "operational_hospitals": "15/36",     # partially functional, per WHO
+    "food_insecurity": "93%",             # acute food insecurity, per IPC
+    "water_access": "15%",                # population with safe water access
 }
-        # Try to fetch from actual sources if available
-        try:
-            # UN OCHA Gaza Flash Update (if accessible)
-            response = requests.get('https://www.ochaopt.org/content/hostilities-gaza-strip-and-israel-flash-update-1', timeout=10)
-            if response.status_code == 200:
-                soup = BeautifulSoup(response.content, 'html.parser')
-                # Extract numbers from text (this is a simplified approach)
-                text = soup.get_text()
-                # Look for death toll patterns
-                death_pattern = r'(\d{1,3}(?:,\d{3})*)\s*(?:people|persons|individuals)\s*(?:killed|dead|deceased)'
-                matches = re.findall(death_pattern, text, re.IGNORECASE)
-                if matches:
-                    stats["total_deaths"] = matches[0] + "+"
-        except:
-            pass
-            
-        return stats
-        
+
+CONFLICT_START = datetime(2023, 10, 7)
+
+
+def fmt(number):
+    """Format a count for display, e.g. 74016 -> '74,016+'."""
+    return f"{int(number):,}+"
+
+
+def fetch_summary():
+    """Fetch the summary dataset, returning the parsed JSON or None."""
+    try:
+        response = requests.get(SUMMARY_URL, timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        return response.json()
     except Exception as e:
-        print(f"Error fetching Gaza Ministry statistics: {e}")
+        print(f"ERROR: could not fetch {SUMMARY_URL}: {e}")
         return None
 
-def fetch_un_stats():
-    """
-    Fetch statistics from UN OCHA and other UN agencies
-    """
-    try:
-        # UN OCHA Gaza statistics
-        stats = {
-            "displaced_people": "1.9M+",
-            "aid_trucks": "150/day",
-            "operational_hospitals": "15/36",
-            "food_insecurity": "93%",
-            "water_access": "15%",
-            "electricity_hours": "2-4",
-            "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M UTC"),
-            "source": "UN OCHA"
-        }
-        
-        # Try to fetch from UN sources
-        try:
-            # WHO Gaza health situation
-            response = requests.get('https://www.who.int/emergencies/situations/gaza-health-situation', timeout=10)
-            if response.status_code == 200:
-                soup = BeautifulSoup(response.content, 'html.parser')
-                text = soup.get_text()
-                
-                # Extract hospital information
-                hospital_pattern = r'(\d+)\s*(?:hospitals?|medical facilities)'
-                hospital_matches = re.findall(hospital_pattern, text, re.IGNORECASE)
-                if hospital_matches:
-                    stats["operational_hospitals"] = f"{hospital_matches[0]}/36"
-                    
-        except:
-            pass
-            
-        return stats
-        
-    except Exception as e:
-        print(f"Error fetching UN statistics: {e}")
-        return None
 
-def fetch_humanitarian_stats():
-    """
-    Fetch additional humanitarian statistics
-    """
-    try:
-        stats = {
-            "hospitals_destroyed": "23",
-            "schools_destroyed": "300+",
-            "homes_destroyed": "60,000+",
-            "mosques_destroyed": "200+",
-            "starvation_deaths": "25+",
-            "medical_staff_killed": "300+",
-            "journalists_killed": "100+",
-            "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M UTC"),
-            "source": "Humanitarian Organizations"
-        }
-        
-        return stats
-        
-    except Exception as e:
-        print(f"Error fetching humanitarian statistics: {e}")
-        return None
+def build_stats(summary):
+    """Build the statistics dict from the API summary payload."""
+    gaza = summary["gaza"]
+    killed = gaza["killed"]
+    west_bank = summary.get("west_bank", {})
+    known = summary.get("known_killed_in_gaza", {})
 
-def fetch_international_response():
-    """
-    Fetch international response statistics
-    """
-    try:
-        stats = {
-            "un_resolutions": "3",
-            "icj_cases": "2",
-            "aid_pledged": "$2.5B+",
-            "countries_condemning": "150+",
-            "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M UTC"),
-            "source": "International Organizations"
-        }
-        
-        return stats
-        
-    except Exception as e:
-        print(f"Error fetching international response: {e}")
-        return None
+    # Sanity check: refuse implausible payloads instead of publishing them.
+    if killed["total"] < 30000:
+        raise ValueError(f"implausible total killed: {killed['total']}")
 
-def calculate_daily_increase():
-    """
-    Calculate daily increase in death toll based on recent trends
-    """
-    try:
-        # Based on recent data, average daily increase
-        base_deaths = 27000
-        daily_increase = 150  # Average daily increase
-        
-        # Calculate current estimate
-        days_since_october = (datetime.now() - datetime(2023, 10, 7)).days
-        estimated_deaths = base_deaths + (daily_increase * days_since_october)
-        
-        return f"{estimated_deaths:,}+"
-        
-    except Exception as e:
-        print(f"Error calculating daily increase: {e}")
-        return "27,000+"
+    stats = {
+        # Core Gaza figures (Gaza Ministry of Health daily reports)
+        "total_deaths": fmt(killed["total"]),
+        "children_deaths": fmt(killed["children"]),
+        "women_deaths": fmt(killed["women"]),
+        "total_injured": fmt(gaza["injured"]["total"]),
+        "press_killed": fmt(killed["press"]),
+        "medical_staff_killed": fmt(killed["medical"]),
+        "civil_defence_killed": fmt(killed["civil_defence"]),
+        "massacres": fmt(gaza["massacres"]),
+        # Manually maintained OCHA figures (see MANUAL_FIGURES above)
+        **MANUAL_FIGURES,
+        # West Bank context (same source, different dataset)
+        "west_bank_killed": fmt(west_bank.get("killed", {}).get("total", 0)),
+        "west_bank_children_killed": fmt(west_bank.get("killed", {}).get("children", 0)),
+        # Known-by-name victims list (always lower than the headcount above)
+        "known_named_victims": fmt(known.get("records", 0)),
+        # Metadata
+        "last_data_update": gaza["last_update"],
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M UTC"),
+        "days_of_conflict": (datetime.now() - CONFLICT_START).days,
+        "fetch_timestamp": datetime.now().isoformat(),
+        "source": "Tech for Palestine - Palestine Datasets (Gaza MoH / UN OCHA)",
+        "source_url": SUMMARY_URL,
+        "sources": [
+            "Gaza Ministry of Health",
+            "Tech for Palestine Datasets",
+            "UN OCHA",
+            "WHO",
+        ],
+        "update_frequency": "hourly",
+        "data_verification": "cross-referenced by Tech for Palestine",
+    }
+
+    # Famine / aid-seeker figures are present in the API only when reported.
+    famine = gaza.get("famine", {})
+    if famine.get("total") is not None:
+        stats["starvation_deaths"] = fmt(famine["total"])
+    aid_seeker = gaza.get("aid_seeker", {})
+    if aid_seeker.get("killed") is not None:
+        stats["aid_seekers_killed"] = fmt(aid_seeker["killed"])
+
+    return stats
+
 
 def save_statistics():
-    """
-    Fetch and save all statistics to JSON file
-    """
-    all_stats = {}
-    
-    # Fetch from multiple sources
-    gaza_stats = fetch_gaza_ministry_stats()
-    if gaza_stats:
-        all_stats.update(gaza_stats)
-    
-    un_stats = fetch_un_stats()
-    if un_stats:
-        all_stats.update(un_stats)
-    
-    humanitarian_stats = fetch_humanitarian_stats()
-    if humanitarian_stats:
-        all_stats.update(humanitarian_stats)
-    
-    international_stats = fetch_international_response()
-    if international_stats:
-        all_stats.update(international_stats)
-    
-    # Add calculated statistics
-    all_stats["estimated_deaths"] = calculate_daily_increase()
-    all_stats["days_of_conflict"] = (datetime.now() - datetime(2023, 10, 7)).days
-    
-    # Add metadata
-    all_stats["fetch_timestamp"] = datetime.now().isoformat()
-    all_stats["sources"] = ["Gaza Ministry of Health", "UN OCHA", "WHO", "Humanitarian Organizations"]
-    all_stats["update_frequency"] = "hourly"
-    all_stats["data_verification"] = "cross-referenced"
-    
-    # Create data directory if it doesn't exist
-    os.makedirs('data', exist_ok=True)
-    
-    # Save to JSON file
-    with open('data/latest_stats.json', 'w', encoding='utf-8') as f:
-        json.dump(all_stats, f, indent=2, ensure_ascii=False)
-    
-    print(f"Statistics updated at {all_stats['fetch_timestamp']}")
-    print(f"Data saved to data/latest_stats.json")
-    
-    return all_stats
+    """Fetch statistics and save them to data/latest_stats.json."""
+    summary = fetch_summary()
+    if summary is None:
+        if os.path.exists(DATA_FILE):
+            print(f"Keeping existing {DATA_FILE} (API unreachable).")
+            return None
+        print("ERROR: no API data and no existing statistics file.")
+        sys.exit(1)
+
+    try:
+        stats = build_stats(summary)
+    except (KeyError, ValueError) as e:
+        print(f"ERROR: unexpected API payload: {e}")
+        if os.path.exists(DATA_FILE):
+            print(f"Keeping existing {DATA_FILE}.")
+            return None
+        sys.exit(1)
+
+    os.makedirs("data", exist_ok=True)
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(stats, f, indent=2, ensure_ascii=False)
+
+    print(f"Statistics updated at {stats['fetch_timestamp']}")
+    print(f"Data through {stats['last_data_update']} | "
+          f"killed: {stats['total_deaths']}, injured: {stats['total_injured']}")
+    print(f"Data saved to {DATA_FILE}")
+    return stats
+
 
 if __name__ == "__main__":
     save_statistics()

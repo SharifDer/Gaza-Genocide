@@ -70,7 +70,7 @@ For technical improvements:
 
 ```bash
 # Clone the repository
-git clone https://github.com/SharifDer/gaza-genocide-documentation.git
+git clone https://github.com/SharifDer/Gaza-Genocide.git
 
 # Install dependencies
 pip install -r requirements.txt
@@ -97,7 +97,7 @@ python scripts/update_badges.py
 
 ## 📞 Contact
 
-- **Report Issues**: [GitHub Issues](https://github.com/SharifDer/gaza-genocide-documentation/issues)
+- **Report Issues**: [GitHub Issues](https://github.com/SharifDer/Gaza-Genocide/issues)
 - **Email**: sharifderhem@gmail.com
 
 

@@ -13,13 +13,13 @@
 ### Circular Statistics Badges
 
 
-[![Death Toll](https://img.shields.io/badge/Death%20Toll-54,084%2B-red?style=for-the-badge)](https://github.com/SharifDer/Stop-Gaza-Genocide-)
-[![Children Killed](https://img.shields.io/badge/Children%20Killed-16,854%2B-orange?style=for-the-badge)](https://github.com/SharifDer/Stop-Gaza-Genocide-)
-[![Women Killed](https://img.shields.io/badge/Women%20Killed-Not%20separately%20published-purple?style=for-the-badge)](https://github.com/SharifDer/Stop-Gaza-Genocide-)
-[![Injured](https://img.shields.io/badge/Injured-123,308%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Stop-Gaza-Genocide-)
-[![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Stop-Gaza-Genocide-)
+[![Death Toll](https://img.shields.io/badge/Death%20Toll-74,016%2B-red?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Children Killed](https://img.shields.io/badge/Children%20Killed-20,179%2B-orange?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Women Killed](https://img.shields.io/badge/Women%20Killed-12,500%2B-purple?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Injured](https://img.shields.io/badge/Injured-175,068%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Hospitals](https://img.shields.io/badge/Hospitals%20Operational-15/36-green?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025-08-03%2012:49%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-27%2013:05%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -50,12 +50,12 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 | Category | LIVE COUNT | Last Updated | Status |
 |----------|------------|--------------|--------|
-| Total Deaths | 27,000+ | 2025-08-01 21:10 UTC | 🔴 LIVE |
-| Children Killed | 11,500+ | 2025-08-01 21:10 UTC | 🟠 LIVE |
-| Women Killed | 8,000+ | 2025-08-01 21:10 UTC | 🔴 LIVE |
-| Injured | 66,000+ | 2025-08-01 21:10 UTC | 🟡 LIVE |
-| Displaced | 1.9M+ | 2025-08-01 21:10 UTC | 🔵 LIVE |
-| Hospitals | 15/36 | 2025-08-01 21:10 UTC | 🟢 LIVE |
+| Total Deaths | 74,016+ | 2026-09-27 13:05 UTC | 🔴 LIVE |
+| Children Killed | 20,179+ | 2026-09-27 13:05 UTC | 🟠 LIVE |
+| Women Killed | 12,500+ | 2026-09-27 13:05 UTC | 🔴 LIVE |
+| Injured | 175,068+ | 2026-09-27 13:05 UTC | 🟡 LIVE |
+| Displaced | 1.9M+ | 2026-09-27 13:05 UTC | 🔵 LIVE |
+| Hospitals | 15/36 | 2026-09-27 13:05 UTC | 🟢 LIVE |
 
 ---
 
@@ -95,7 +95,8 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 | Oct 15, 2023 | Ground operations begin | 5,000+ dead | [UN OCHA] |
 | Nov 15, 2023 | Al-Shifa Hospital siege | 15,000+ dead | [WHO] |
 | Dec 15, 2023 | Khan Younis offensive | 22,000+ dead | [UN OCHA] |
-| Jan 8, 2024 | Current situation | 27,000+ dead | [Gaza MoH] |
+| Jan 8, 2024 | Death toll passes 27,000 | 27,000+ dead | [Gaza MoH] |
+| Latest | Verified cumulative toll | See live table above | [Gaza MoH / TfP](https://data.techforpalestine.org) |
 | TODAY | ONGOING GENOCIDE | LIVE UPDATES | REAL-TIME |
 
 ---
@@ -115,8 +116,8 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 - 15 out of 36 hospitals operational - Healthcare system destroyed  
 - 80% of essential medicines unavailable - No treatment for diseases  
-- 300+ medical staff killed - Doctors and nurses targeted while saving lives  
-- 100+ journalists killed - Truth-tellers silenced  
+- 1,700+ medical staff killed - Doctors and nurses targeted while saving lives  
+- 260+ journalists killed - Truth-tellers silenced  
 
 #### Displacement Hell
 
@@ -149,6 +150,7 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 ### Verified Sources
 
 - Gaza Ministry of Health: [Official Reports](https://www.moh.gov.ps/)  
+- Tech for Palestine Datasets: [Machine-readable daily casualty data](https://data.techforpalestine.org) (the live source for this repo's badges and table)  
 - UN OCHA: [Gaza Flash Updates](https://www.ochaopt.org/)  
 - WHO: [Gaza Health Situation](https://www.who.int/emergencies/situations/gaza-health-situation)  
 - International Media: [Verified Reports](https://www.reuters.com/)  
@@ -186,20 +188,24 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 This documentation updates **automatically every hour** with the latest verified statistics using GitHub Actions automation.
 
+**How it works:**
+1. `fetch_statistics.py` pulls real, cumulative figures from the [Tech for Palestine Datasets API](https://data.techforpalestine.org/docs/summary/) (`api/v3/summary.json`), which mirrors the Gaza Ministry of Health daily reports cross-referenced with UN OCHA.
+2. `scripts/update_badges.py` writes those numbers into the badges and the live statistics table above.
+3. The GitHub Actions workflow commits and pushes any changes.
+
 **Features:**
-- ✅ **Real-time data** from verified sources
+- ✅ **Real data** — no estimates, no extrapolation; only published MoH/UN figures
 - ✅ **Automated updates** every hour
-- ✅ **Static badges** with current statistics
-- ✅ **Cross-source verification** for accuracy
-- ✅ **Professional presentation** for maximum impact
+- ✅ **Graceful fallback** — if the API is unreachable, the last good data is kept
+- ✅ **Cross-source verification** via Tech for Palestine
 
 ---
 
 ## 📞 Contact & Support
 
-- **Report Issues**: [GitHub Issues](https://github.com/SharifDer/Stop-Gaza-Genocide-/issues)
+- **Report Issues**: [GitHub Issues](https://github.com/SharifDer/Gaza-Genocide/issues)
 - **Email**: sharifderhem@gmail.com
-- **Repository**: [https://github.com/SharifDer/Stop-Gaza-Genocide-](https://github.com/SharifDer/Stop-Gaza-Genocide-)
+- **Repository**: [https://github.com/SharifDer/Gaza-Genocide](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -217,7 +223,7 @@ This documentation is released under [Creative Commons Attribution 4.0 Internati
 
 ---
 
-**Last Updated**: 2025-08-03 12:49 UTC
+**Last Updated**: 2026-09-27 13:05 UTC
 
 **Star this repo** ⭐ to help spread awareness and keep this documentation visible.
 
