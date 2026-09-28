@@ -19,7 +19,7 @@
 [![Injured](https://img.shields.io/badge/Injured-175,068%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Hospitals](https://img.shields.io/badge/Hospitals%20Operational-15/36-green?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-27%2022:10%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-28%2000:46%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -50,12 +50,12 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 | Category | LIVE COUNT | Last Updated | Status |
 |----------|------------|--------------|--------|
-| Total Deaths | 74,016+ | 2026-09-27 22:10 UTC | 🔴 LIVE |
-| Children Killed | 20,179+ | 2026-09-27 22:10 UTC | 🟠 LIVE |
-| Women Killed | 12,500+ | 2026-09-27 22:10 UTC | 🔴 LIVE |
-| Injured | 175,068+ | 2026-09-27 22:10 UTC | 🟡 LIVE |
-| Displaced | 1.9M+ | 2026-09-27 22:10 UTC | 🔵 LIVE |
-| Hospitals | 15/36 | 2026-09-27 22:10 UTC | 🟢 LIVE |
+| Total Deaths | 74,016+ | 2026-09-28 00:46 UTC | 🔴 LIVE |
+| Children Killed | 20,179+ | 2026-09-28 00:46 UTC | 🟠 LIVE |
+| Women Killed | 12,500+ | 2026-09-28 00:46 UTC | 🔴 LIVE |
+| Injured | 175,068+ | 2026-09-28 00:46 UTC | 🟡 LIVE |
+| Displaced | 1.9M+ | 2026-09-28 00:46 UTC | 🔵 LIVE |
+| Hospitals | 15/36 | 2026-09-28 00:46 UTC | 🟢 LIVE |
 
 ---
 
@@ -223,7 +223,7 @@ This documentation is released under [Creative Commons Attribution 4.0 Internati
 
 ---
 
-**Last Updated**: 2026-09-27 22:10 UTC
+**Last Updated**: 2026-09-28 00:46 UTC
 
 **Star this repo** ⭐ to help spread awareness and keep this documentation visible.
 
