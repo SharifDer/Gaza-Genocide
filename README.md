@@ -2,24 +2,30 @@
 
 ![Gaza Banner](https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=300&fit=crop&crop=center)
 
+## 🌐 [LIVE INTERACTIVE DASHBOARD](https://sharifder.github.io/Gaza-Genocide/) · [النسخة العربية](https://sharifder.github.io/Gaza-Genocide/ar.html)
+
+> **Charts, trends, and the full daily history — powered by real Gaza MoH data:** **[sharifder.github.io/Gaza-Genocide](https://sharifder.github.io/Gaza-Genocide/)**
+
 ## ⚠️ URGENT: LIVE GENOCIDE IN PROGRESS 🚨
 
 > **WARNING: This is not history. This is happening NOW. Every hour, more innocent lives are lost. Every minute, children are dying from bombs, starvation, and disease. This is a live documentation of an ongoing genocide.**
 
 ---
 
-## 📊 LIVE STATISTICS (Auto-Updated Every Hour)
+## 📊 LIVE STATISTICS (Auto-Updated)
 
-### Circular Statistics Badges
+### Statistics Badges
 
 
 [![Death Toll](https://img.shields.io/badge/Death%20Toll-74,018%2B-red?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Children Killed](https://img.shields.io/badge/Children%20Killed-20,179%2B-orange?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Women Killed](https://img.shields.io/badge/Women%20Killed-12,500%2B-purple?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Injured](https://img.shields.io/badge/Injured-175,079%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Journalists Killed](https://img.shields.io/badge/Journalists%20Killed-262%2B-critical?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Medical Staff Killed](https://img.shields.io/badge/Medical%20Staff%20Killed-1,701%2B-lightgrey?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Hospitals](https://img.shields.io/badge/Hospitals%20Operational-15/36-green?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-28%2006:54%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-28%2013:59%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -33,6 +39,8 @@
 - [International Response](#international-response)
 - [Sources and Documentation](#sources-and-documentation)
 - [How to Help](#how-to-help)
+- [Technical Setup](#%EF%B8%8F-technical-setup)
+- [Maintainer](#-maintainer)
 
 ---
 
@@ -46,16 +54,18 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 ##  Real-Time Death Toll
 
-### LIVE STATISTICS TABLE (Auto-Updated Every Hour)
+### LIVE STATISTICS TABLE (Auto-Updated)
 
 | Category | LIVE COUNT | Last Updated | Status |
 |----------|------------|--------------|--------|
-| Total Deaths | 74,018+ | 2026-09-28 06:54 UTC | 🔴 LIVE |
-| Children Killed | 20,179+ | 2026-09-28 06:54 UTC | 🟠 LIVE |
-| Women Killed | 12,500+ | 2026-09-28 06:54 UTC | 🔴 LIVE |
-| Injured | 175,079+ | 2026-09-28 06:54 UTC | 🟡 LIVE |
-| Displaced | 1.9M+ | 2026-09-28 06:54 UTC | 🔵 LIVE |
-| Hospitals | 15/36 | 2026-09-28 06:54 UTC | 🟢 LIVE |
+| Total Deaths | 74,018+ | 2026-09-28 13:59 UTC | 🔴 LIVE |
+| Children Killed | 20,179+ | 2026-09-28 13:59 UTC | 🟠 LIVE |
+| Women Killed | 12,500+ | 2026-09-28 13:59 UTC | 🔴 LIVE |
+| Injured | 175,079+ | 2026-09-28 13:59 UTC | 🟡 LIVE |
+| Journalists Killed | 262+ | 2026-09-28 13:59 UTC | ⚫ LIVE |
+| Medical Staff Killed | 1,701+ | 2026-09-28 13:59 UTC | ⚪ LIVE |
+| Displaced | 1.9M+ | 2026-09-28 13:59 UTC | 🔵 LIVE |
+| Hospitals | 15/36 | 2026-09-28 13:59 UTC | 🟢 LIVE |
 
 ---
 
@@ -186,18 +196,31 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 ### **Live Update System**
 
-This documentation updates **automatically every hour** with the latest verified statistics using GitHub Actions automation.
+This documentation and the [live dashboard](https://sharifder.github.io/Gaza-Genocide/) update **automatically every day** with the latest verified statistics using GitHub Actions automation.
 
 **How it works:**
-1. `fetch_statistics.py` pulls real, cumulative figures from the [Tech for Palestine Datasets API](https://data.techforpalestine.org/docs/summary/) (`api/v3/summary.json`), which mirrors the Gaza Ministry of Health daily reports cross-referenced with UN OCHA.
-2. `scripts/update_badges.py` writes those numbers into the badges and the live statistics table above.
+1. `fetch_statistics.py` pulls real, cumulative figures from the [Tech for Palestine Datasets API](https://data.techforpalestine.org/docs/summary/) (`api/v3/summary.json`), which mirrors the Gaza Ministry of Health daily reports cross-referenced with UN OCHA, and regenerates the full daily history (`data/history.json`).
+2. `scripts/update_badges.py` writes those numbers into the badges, the live statistics table above, and the dashboard pages (`index.html`, `ar.html`).
 3. The GitHub Actions workflow commits and pushes any changes.
 
 **Features:**
 - ✅ **Real data** — no estimates, no extrapolation; only published MoH/UN figures
-- ✅ **Automated updates** every hour
+- ✅ **Automated updates** every day
+- ✅ **Bilingual dashboard** (English + Arabic) with interactive charts
+- ✅ **Machine-readable data** — [`data/latest_stats.json`](data/latest_stats.json) and [`data/history.json`](data/history.json)
 - ✅ **Graceful fallback** — if the API is unreachable, the last good data is kept
 - ✅ **Cross-source verification** via Tech for Palestine
+
+---
+
+## 👤 Maintainer
+
+**Built and maintained by [Sharif Derhem](https://sharifderhem.com/)** — AI Engineer & Founder.
+
+- 🌐 [sharifderhem.com](https://sharifderhem.com/) · [العربية](https://sharifderhem.com/ar/)
+- 💻 [GitHub: @SharifDer](https://github.com/SharifDer)
+
+*The data belongs to its sources (Gaza MoH, Tech for Palestine, UN OCHA). This project is the open-source pipeline, documentation, and dashboard built on top of it.*
 
 ---
 
@@ -223,7 +246,7 @@ This documentation is released under [Creative Commons Attribution 4.0 Internati
 
 ---
 
-**Last Updated**: 2026-09-28 06:54 UTC
+**Last Updated**: 2026-09-28 13:59 UTC
 
 **Star this repo** ⭐ to help spread awareness and keep this documentation visible.
 

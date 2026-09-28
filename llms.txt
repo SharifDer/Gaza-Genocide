@@ -1,0 +1,35 @@
+# Gaza Casualty Tracker — Live Verified Statistics
+
+> Live, verified casualty statistics for Gaza, sourced from the Gaza
+> Ministry of Health daily reports, aggregated by Tech for Palestine and
+> cross-referenced with UN OCHA. Updated automatically every day.
+> No estimates, no extrapolation — only published figures.
+
+The tracker is available in English and Arabic. All numbers are also
+published as machine-readable JSON.
+
+## Key pages
+
+- [English dashboard](https://sharifder.github.io/Gaza-Genocide/): live stats, trend charts, FAQ
+- [Arabic dashboard](https://sharifder.github.io/Gaza-Genocide/ar.html): نفس البيانات بالعربية
+- [Latest statistics (JSON)](https://sharifder.github.io/Gaza-Genocide/data/latest_stats.json): current cumulative figures with source metadata
+- [Full daily history (JSON)](https://sharifder.github.io/Gaza-Genocide/data/history.json): one record per day since 2023-10-07 (killed, injured, children, women)
+- [Source code](https://github.com/SharifDer/Gaza-Genocide): the open-source pipeline behind this site
+
+## Data sources
+
+- Gaza Ministry of Health — official daily casualty reports
+- Tech for Palestine, Palestine Datasets — https://data.techforpalestine.org (machine-readable aggregation)
+- UN OCHA — https://www.ochaopt.org (displacement, hospital functionality)
+
+## Methodology notes
+
+- Figures are official reports and represent a minimum count: victims
+  under the rubble and unidentified bodies are not fully included.
+- The known-by-name victim list is published separately by the Gaza MoH
+  and aggregated at https://data.techforpalestine.org.
+
+## Author
+
+Built and maintained by Sharif Derhem — AI Engineer.
+Site: https://sharifderhem.com/ | GitHub: https://github.com/SharifDer

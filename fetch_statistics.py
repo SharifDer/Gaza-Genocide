@@ -13,6 +13,9 @@ Endpoints used:
       Latest cumulative values (killed, injured, children, women, press,
       medical staff, civil defence, massacres) for Gaza, the West Bank
       and Lebanon, plus the known-by-name victim list summary.
+  - https://data.techforpalestine.org/api/v2/casualties_daily.json
+      Full daily time series since Oct 7, 2023. Used to regenerate
+      data/history.json (powers the trend charts on the dashboard).
 
 Figures that are NOT available from this API (displacement, hospital
 functionality, food insecurity) are kept as manually-maintained values in
@@ -45,6 +48,9 @@ MANUAL_FIGURES = {
 
 CONFLICT_START = datetime(2023, 10, 7)
 
+DAILY_URL = "https://data.techforpalestine.org/api/v2/casualties_daily.json"
+HISTORY_FILE = "data/history.json"
+
 
 def fmt(number):
     """Format a count for display, e.g. 74016 -> '74,016+'."""
@@ -60,6 +66,37 @@ def fetch_summary():
     except Exception as e:
         print(f"ERROR: could not fetch {SUMMARY_URL}: {e}")
         return None
+
+
+def fetch_daily_series():
+    """Fetch the full daily casualty time series, or None on failure."""
+    try:
+        response = requests.get(DAILY_URL, timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        print(f"WARNING: could not fetch daily series: {e}")
+        return None
+
+
+def save_history(daily):
+    """Regenerate data/history.json from the daily series.
+
+    One record per reported day; children/women cumulative fields only
+    exist in the source from later reports, so they may be null early on.
+    """
+    history = []
+    for rec in daily:
+        history.append({
+            "date": rec["report_date"],
+            "killed": rec.get("killed_cum"),
+            "injured": rec.get("injured_cum"),
+            "children": rec.get("ext_killed_children_cum"),
+            "women": rec.get("ext_killed_women_cum"),
+        })
+    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False)
+    print(f"History saved to {HISTORY_FILE} ({len(history)} daily records)")
 
 
 def build_stats(summary):
@@ -103,7 +140,7 @@ def build_stats(summary):
             "UN OCHA",
             "WHO",
         ],
-        "update_frequency": "hourly",
+        "update_frequency": "daily",
         "data_verification": "cross-referenced by Tech for Palestine",
     }
 
@@ -140,6 +177,12 @@ def save_statistics():
     os.makedirs("data", exist_ok=True)
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(stats, f, indent=2, ensure_ascii=False)
+
+    # Regenerate the full daily history used by the dashboard charts.
+    # Failure here is non-fatal: the previously saved history is kept.
+    daily = fetch_daily_series()
+    if daily:
+        save_history(daily)
 
     print(f"Statistics updated at {stats['fetch_timestamp']}")
     print(f"Data through {stats['last_data_update']} | "

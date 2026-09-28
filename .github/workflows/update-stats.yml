@@ -2,7 +2,7 @@ name: Update Gaza Statistics
 
 on:
   schedule:
-    - cron: '17 * * * *'  # Every hour at :17
+    - cron: '17 3 * * *'  # Every day at 03:17 UTC
   workflow_dispatch:      # Allow manual trigger
 
 permissions:
@@ -38,5 +38,5 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add data/latest_stats.json README.md
+        git add data/latest_stats.json data/history.json README.md index.html ar.html
         git diff --quiet --staged || (git commit -m "Update Gaza statistics - $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)

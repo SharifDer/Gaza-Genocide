@@ -13,7 +13,7 @@ Thank you for your interest in contributing to this important documentation proj
 
 ### Updating Statistics
 
-- Statistics are **auto-updated** via GitHub Actions every hour
+- Statistics are **auto-updated** via GitHub Actions every day
 - Manual updates require **verification** from multiple sources
 - Cross-reference with:
   - Gaza Ministry of Health

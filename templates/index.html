@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaza Casualty Tracker — Live Verified Statistics | {{TOTAL_DEATHS}} Killed</title>
+<meta name="description" content="Live, verified Gaza casualty statistics: {{TOTAL_DEATHS}} killed, {{CHILDREN_DEATHS}} children, {{TOTAL_INJURED}} injured. Data from the Gaza Ministry of Health via Tech for Palestine, updated automatically.">
+<link rel="canonical" href="https://sharifder.github.io/Gaza-Genocide/">
+<link rel="alternate" hreflang="en" href="https://sharifder.github.io/Gaza-Genocide/">
+<link rel="alternate" hreflang="ar" href="https://sharifder.github.io/Gaza-Genocide/ar.html">
+<meta name="author" content="Sharif Derhem">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gaza Casualty Tracker — Live Verified Statistics">
+<meta property="og:description" content="{{TOTAL_DEATHS}} killed, {{CHILDREN_DEATHS}} children, {{TOTAL_INJURED}} injured. Verified data, updated automatically.">
+<meta property="og:url" content="https://sharifder.github.io/Gaza-Genocide/">
+<meta property="og:site_name" content="Gaza Casualty Tracker">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gaza Casualty Tracker — Live Verified Statistics">
+<meta name="twitter:description" content="{{TOTAL_DEATHS}} killed, {{CHILDREN_DEATHS}} children. Verified data, updated automatically.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Gaza Casualty Tracker — Live Verified Statistics",
+  "description": "Daily-updated casualty statistics for Gaza from the Gaza Ministry of Health, aggregated by Tech for Palestine and cross-referenced with UN OCHA.",
+  "url": "https://sharifder.github.io/Gaza-Genocide/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "Person",
+    "name": "Sharif Derhem",
+    "url": "https://sharifderhem.com/",
+    "sameAs": [
+      "https://github.com/SharifDer",
+      "https://sharifderhem.com/"
+    ]
+  },
+  "isBasedOn": "https://data.techforpalestine.org/",
+  "temporalCoverage": "2023-10-07/..",
+  "spatialCoverage": {"@type": "Place", "name": "Gaza Strip, Palestine"}
+}
+</script>
+<style>
+  :root {
+    --bg: #0d1117; --card: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e;
+    --red: #e63946; --green: #2a9d8f; --accent: #ce1126;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 24px 16px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .lang { color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; font-size: 14px; }
+  .lang:hover { color: var(--text); border-color: var(--muted); }
+  .hero { text-align: center; padding: 40px 0 24px; }
+  .hero h1 { font-size: 2rem; margin-bottom: 12px; }
+  .hero p { color: var(--muted); max-width: 640px; margin: 0 auto 16px; }
+  .live-pill { display: inline-block; background: rgba(230,57,70,.12); color: var(--red); border: 1px solid rgba(230,57,70,.4); padding: 6px 16px; border-radius: 20px; font-size: 14px; }
+  .live-pill::before { content: "●"; margin-right: 8px; animation: blink 1.5s infinite; }
+  @keyframes blink { 50% { opacity: .3; } }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 32px 0; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .card .num { font-size: 1.8rem; font-weight: 700; color: var(--red); }
+  .card .lbl { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .card.green .num { color: var(--green); }
+  section { margin: 48px 0; }
+  h2 { font-size: 1.4rem; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .chart-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .faq dt { font-weight: 600; margin-top: 20px; }
+  .faq dd { color: var(--muted); margin-top: 6px; }
+  .sources li { margin: 8px 0; color: var(--muted); }
+  a { color: #58a6ff; }
+  footer { border-top: 1px solid var(--border); margin-top: 48px; padding: 24px 0; text-align: center; color: var(--muted); font-size: 14px; }
+  footer a { color: var(--text); text-decoration: none; font-weight: 600; }
+  .note { color: var(--muted); font-size: 13px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <strong>🇵🇸 Gaza Casualty Tracker</strong>
+    <a class="lang" href="ar.html">العربية</a>
+  </header>
+
+  <div class="hero">
+    <h1>Live Verified Statistics from Gaza</h1>
+    <p>Real casualty figures from the Gaza Ministry of Health daily reports, aggregated by Tech for Palestine and cross-referenced with UN OCHA. No estimates. No extrapolation. Updated automatically.</p>
+    <span class="live-pill">Data through {{LAST_DATA_UPDATE}} · updated {{LAST_UPDATED}}</span>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="num">{{TOTAL_DEATHS}}</div><div class="lbl">People Killed</div></div>
+    <div class="card"><div class="num">{{CHILDREN_DEATHS}}</div><div class="lbl">Children Killed</div></div>
+    <div class="card"><div class="num">{{WOMEN_DEATHS}}</div><div class="lbl">Women Killed</div></div>
+    <div class="card"><div class="num">{{TOTAL_INJURED}}</div><div class="lbl">Injured</div></div>
+    <div class="card"><div class="num">{{PRESS_KILLED}}</div><div class="lbl">Journalists Killed</div></div>
+    <div class="card"><div class="num">{{MEDICAL_KILLED}}</div><div class="lbl">Medical Staff Killed</div></div>
+    <div class="card"><div class="num">{{MASSACRES}}</div><div class="lbl">Massacres</div></div>
+    <div class="card green"><div class="num">{{DISPLACED}}</div><div class="lbl">Displaced</div></div>
+    <div class="card green"><div class="num">{{HOSPITALS}}</div><div class="lbl">Hospitals Operational</div></div>
+  </div>
+
+  <section>
+    <h2>📈 Cumulative Toll Since October 7, 2023</h2>
+    <div class="chart-box"><canvas id="trendChart" height="120"></canvas></div>
+    <p class="note">Full daily series from the Tech for Palestine casualties dataset ({{DAYS_OF_CONFLICT}} days of conflict).</p>
+  </section>
+
+  <section>
+    <h2>👥 Who Is Being Killed</h2>
+    <div class="chart-box" style="max-width:420px;margin:0 auto;"><canvas id="breakdownChart"></canvas></div>
+  </section>
+
+  <section>
+    <h2>❓ Frequently Asked Questions</h2>
+    <dl class="faq">
+      <dt>How many people have been killed in Gaza?</dt>
+      <dd>As of {{LAST_DATA_UPDATE}}, the Gaza Ministry of Health reports {{TOTAL_DEATHS}} people killed, including {{CHILDREN_DEATHS}} children and {{WOMEN_DEATHS}} women, with {{TOTAL_INJURED}} more injured.</dd>
+      <dt>Where does this data come from?</dt>
+      <dd>From the Gaza Ministry of Health's daily reports, aggregated and published in machine-readable form by <a href="https://data.techforpalestine.org">Tech for Palestine</a>, cross-referenced with UN OCHA figures.</dd>
+      <dt>Are these numbers accurate?</dt>
+      <dd>They are the official verified figures, and are considered <em>minimum</em> counts: victims still under the rubble and unidentified bodies are not fully included. The known-by-name victim list currently stands at {{KNOWN_NAMED}}.</dd>
+      <dt>How often is this page updated?</dt>
+      <dd>Automatically, every day, by an open-source pipeline. The raw data is also available as JSON: <a href="data/latest_stats.json">latest statistics</a> and <a href="data/history.json">full daily history</a>.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>📚 Sources</h2>
+    <ul class="sources">
+      <li>Gaza Ministry of Health — official daily casualty reports</li>
+      <li><a href="https://data.techforpalestine.org">Tech for Palestine — Palestine Datasets</a> (machine-readable aggregation)</li>
+      <li><a href="https://www.ochaopt.org/">UN OCHA</a> — humanitarian situation updates (displacement, hospitals)</li>
+      <li><a href="https://github.com/SharifDer/Gaza-Genocide">Source code of this tracker</a> — open source, CC BY 4.0</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Built and maintained by <a href="https://sharifderhem.com/">Sharif Derhem</a> · <a href="https://github.com/SharifDer/Gaza-Genocide">GitHub</a></p>
+    <p class="note">Data: Gaza Ministry of Health / Tech for Palestine / UN OCHA. Every number is a human life.</p>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+const PALETTE = { red: "#e63946", orange: "#f4a261", green: "#2a9d8f", purple: "#9d4edd" };
+
+fetch("data/history.json").then(r => r.json()).then(history => {
+  const labels = history.map(d => d.date);
+  const series = key => history.map(d => (d[key] && d[key] > 0) ? d[key] : null);
+  new Chart(document.getElementById("trendChart"), {
+    type: "line",
+    data: { labels, datasets: [
+      { label: "Killed", data: series("killed"), borderColor: PALETTE.red, borderWidth: 2, pointRadius: 0, spanGaps: true },
+      { label: "Injured", data: series("injured"), borderColor: PALETTE.orange, borderWidth: 2, pointRadius: 0, spanGaps: true },
+      { label: "Children", data: series("children"), borderColor: PALETTE.purple, borderWidth: 2, pointRadius: 0, spanGaps: true },
+      { label: "Women", data: series("women"), borderColor: PALETTE.green, borderWidth: 2, pointRadius: 0, spanGaps: true }
+    ]},
+    options: {
+      interaction: { mode: "index", intersect: false },
+      scales: { x: { ticks: { maxTicksLimit: 10, color: "#8b949e" }, grid: { color: "#21262d" } },
+                y: { ticks: { color: "#8b949e" }, grid: { color: "#21262d" } } },
+      plugins: { legend: { labels: { color: "#e6edf3" } } }
+    }
+  });
+});
+
+const N_CHILDREN = {{N_CHILDREN}}, N_WOMEN = {{N_WOMEN}}, N_KILLED = {{N_KILLED}};
+new Chart(document.getElementById("breakdownChart"), {
+  type: "doughnut",
+  data: {
+    labels: ["Children", "Women", "Men"],
+    datasets: [{ data: [N_CHILDREN, N_WOMEN, Math.max(N_KILLED - N_CHILDREN - N_WOMEN, 0)],
+                 backgroundColor: [PALETTE.purple, PALETTE.green, "#57606a"] }]
+  },
+  options: { plugins: { legend: { position: "bottom", labels: { color: "#e6edf3" } } } }
+});
+</script>
+</body>
+</html>

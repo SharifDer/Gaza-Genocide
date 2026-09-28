@@ -17,6 +17,8 @@ BADGES = [
     ("children_deaths", "Children%20Killed", "orange"),
     ("women_deaths", "Women%20Killed", "purple"),
     ("total_injured", "Injured", "yellow"),
+    ("press_killed", "Journalists%20Killed", "critical"),
+    ("medical_staff_killed", "Medical%20Staff%20Killed", "lightgrey"),
     ("displaced_people", "Displaced", "blue"),
     ("operational_hospitals", "Hospitals%20Operational", "green"),
 ]
@@ -28,9 +30,49 @@ TABLE_ROWS = [
     ("Children Killed", "children_deaths"),
     ("Women Killed", "women_deaths"),
     ("Injured", "total_injured"),
+    ("Journalists Killed", "press_killed"),
+    ("Medical Staff Killed", "medical_staff_killed"),
     ("Displaced", "displaced_people"),
     ("Hospitals", "operational_hospitals"),
 ]
+
+# Placeholders in the dashboard HTML templates -> key in stats JSON.
+# Values are injected at update time so the numbers are visible to
+# search engines and AI crawlers as plain static text (no JS needed).
+# The generated pages (index.html, ar.html) are what GitHub Pages serves;
+# templates/ holds the source with {{PLACEHOLDER}} tokens.
+HTML_TEMPLATES = {
+    "templates/index.html": "index.html",
+    "templates/ar.html": "ar.html",
+}
+HTML_PLACEHOLDERS = {
+    "TOTAL_DEATHS": "total_deaths",
+    "CHILDREN_DEATHS": "children_deaths",
+    "WOMEN_DEATHS": "women_deaths",
+    "TOTAL_INJURED": "total_injured",
+    "PRESS_KILLED": "press_killed",
+    "MEDICAL_KILLED": "medical_staff_killed",
+    "MASSACRES": "massacres",
+    "DISPLACED": "displaced_people",
+    "HOSPITALS": "operational_hospitals",
+    "KNOWN_NAMED": "known_named_victims",
+    "LAST_DATA_UPDATE": "last_data_update",
+    "LAST_UPDATED": "last_updated",
+    "DAYS_OF_CONFLICT": "days_of_conflict",
+}
+
+# Raw numeric placeholders used by the dashboard charts.
+HTML_NUMERIC = {
+    "N_KILLED": "total_deaths",
+    "N_CHILDREN": "children_deaths",
+    "N_WOMEN": "women_deaths",
+}
+
+
+def to_int(value):
+    """'74,018+' -> 74018"""
+    digits = re.sub(r"[^\d]", "", str(value))
+    return int(digits) if digits else 0
 
 
 def load_latest_stats():
@@ -123,9 +165,50 @@ def update_readme_badges():
         return False
 
 
+def update_html_pages(stats):
+    """Generate the dashboard HTML pages from templates/ with the
+    current statistics injected as static text (visible to search
+    engines and AI crawlers), while the charts stay interactive via
+    JavaScript. Returns True if every page was generated cleanly.
+    """
+    ok = True
+    for template_path, out_path in HTML_TEMPLATES.items():
+        try:
+            with open(template_path, "r", encoding="utf-8") as f:
+                content = f.read()
+        except FileNotFoundError:
+            print(f"WARNING: {template_path} not found, skipping")
+            ok = False
+            continue
+
+        for placeholder, key in HTML_PLACEHOLDERS.items():
+            value = stats.get(key)
+            if value is None:
+                continue
+            content = content.replace("{{" + placeholder + "}}", str(value))
+
+        for placeholder, key in HTML_NUMERIC.items():
+            token = "{{" + placeholder + "}}"
+            if token in content:
+                content = content.replace(token, str(to_int(stats.get(key, 0))))
+
+        remaining = re.findall(r"\{\{[A-Z_]+\}\}", content)
+        if remaining:
+            print(f"WARNING: {out_path} has unfilled placeholders: {sorted(set(remaining))}")
+            ok = False
+
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"{out_path} generated from {template_path}")
+    return ok
+
+
 if __name__ == "__main__":
     print("Updating README badges...")
+    stats = load_latest_stats()
     success = update_readme_badges()
+    if stats:
+        update_html_pages(stats)
 
     if success:
         print("Badge update completed successfully!")

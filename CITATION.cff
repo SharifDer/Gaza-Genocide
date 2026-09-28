@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this dataset or dashboard, please cite it as below."
+title: "Gaza Casualty Tracker — Live Verified Statistics"
+authors:
+  - family-names: Derhem
+    given-names: Sharif
+    website: "https://sharifderhem.com/"
+url: "https://sharifder.github.io/Gaza-Genocide/"
+repository-code: "https://github.com/SharifDer/Gaza-Genocide"
+license: CC-BY-4.0
+keywords:
+  - Gaza
+  - Palestine
+  - casualty statistics
+  - humanitarian crisis
+  - open data

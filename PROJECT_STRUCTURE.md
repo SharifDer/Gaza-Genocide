@@ -8,14 +8,25 @@ Gaza-Genocide/
 ├── CONTRIBUTING.md                    # Contribution guidelines
 ├── PROJECT_STRUCTURE.md               # This file - project documentation
 ├── DEPLOYMENT_GUIDE.md                # Deployment instructions
+├── CITATION.cff                       # Citation metadata (GitHub "Cite this repository")
 ├── requirements.txt                   # Python dependencies
 ├── fetch_statistics.py                # Main data fetching script (repo root)
+├── index.html                         # Live dashboard (English, generated - do not edit)
+├── ar.html                            # Live dashboard (Arabic, generated - do not edit)
+├── robots.txt                         # Search engine crawling rules
+├── sitemap.xml                        # Sitemap for search engines
+├── llms.txt                           # Project summary for AI crawlers (GEO)
+├── .nojekyll                          # Serve as plain static site on GitHub Pages
+├── templates/
+│   ├── index.html                    # Dashboard template (English) - edit this one
+│   └── ar.html                       # Dashboard template (Arabic) - edit this one
 ├── .github/workflows/
-│   └── update-stats.yml              # GitHub Actions for hourly updates
+│   └── update-stats.yml              # GitHub Actions for automated updates
 ├── scripts/
-│   └── update_badges.py              # Badge + table update script
+│   └── update_badges.py              # Badge + table + HTML generation script
 └── data/
-    └── latest_stats.json             # Current statistics (auto-generated)
+    ├── latest_stats.json             # Current statistics (auto-generated)
+    └── history.json                  # Full daily time series (auto-generated)
 ```
 
 ## 🔧 Core Components
@@ -33,18 +44,39 @@ Gaza-Genocide/
 **Key Features**:
 - No estimates or extrapolation — only published figures
 - Sanity checks on the API payload before accepting it
+- Regenerates `data/history.json` (full daily time series since Oct 7, 2023)
+  from the API's `casualties_daily` dataset — powers the dashboard charts
 - Fallback: if the API is unreachable, the previously saved `data/latest_stats.json` is kept untouched
 - Figures not exposed by the API (displacement, hospital functionality, food insecurity) are manually-maintained constants in `MANUAL_FIGURES`, sourced from UN OCHA flash updates
 
-### 2. Badge Update System (`scripts/update_badges.py`)
+### 2. Update Script (`scripts/update_badges.py`)
 
-**Purpose**: Updates README badges and the live statistics table with the latest numbers.
+**Purpose**: Propagates the latest numbers into every human-facing surface.
 
 **Key Features**:
 - Reads `data/latest_stats.json` and creates shields.io badge URLs
 - Updates the badge row and the "LIVE STATISTICS TABLE" in README.md
+- Generates `index.html` and `ar.html` from `templates/` — injecting the
+  numbers as **static text** so search engines and AI crawlers can read
+  them (the interactive charts load via JavaScript on top)
 - Updates the "Last Updated" timestamp
-- Warns if an expected badge or table row is not found
+- Warns if an expected badge, table row, or placeholder is not found
+
+### 3. Live Dashboard (`index.html` / `ar.html`)
+
+**Purpose**: Interactive, bilingual public face of the data.
+
+**Key Features**:
+- English and Arabic (RTL) versions with hreflang links
+- Stat cards, cumulative trend chart, demographic breakdown chart (Chart.js)
+- FAQ section with dated, sourced, quotable statements (GEO)
+- SEO: meta description, Open Graph, JSON-LD `Dataset` + `Person` schema
+- Author attribution to the maintainer (Sharif Derhem)
+- Served by GitHub Pages at https://sharifder.github.io/Gaza-Genocide/
+
+**Important**: the root `index.html` and `ar.html` are **generated files**.
+Edit `templates/index.html` / `templates/ar.html` instead; the update
+script regenerates the pages on every run.
 
 **Badges**:
 - Death Toll (red)
@@ -57,9 +89,9 @@ Gaza-Genocide/
 
 ### 3. GitHub Actions Workflow (`.github/workflows/update-stats.yml`)
 
-**Purpose**: Automated hourly updates.
+**Purpose**: Automated updates.
 
-**Schedule**: Runs every hour (`17 * * * *`), plus manual `workflow_dispatch`.
+**Schedule**: Runs every day (`17 3 * * *`), plus manual `workflow_dispatch`.
 
 **Steps**:
 1. Checkout repository
@@ -98,17 +130,30 @@ Gaza-Genocide/
   "fetch_timestamp": "2026-09-27T12:51:29.868386",
   "source": "Tech for Palestine - Palestine Datasets (Gaza MoH / UN OCHA)",
   "source_url": "https://data.techforpalestine.org/api/v3/summary.json",
-  "update_frequency": "hourly",
+  "update_frequency": "daily",
   "data_verification": "cross-referenced by Tech for Palestine"
 }
+```
+
+### History JSON Format (`data/history.json`)
+
+One record per reported day, regenerated from the API's daily series:
+
+```json
+[
+  {"date": "2023-10-07", "killed": 232, "injured": 1610, "children": 0, "women": 0},
+  ...
+  {"date": "2026-09-27", "killed": 74018, "injured": 175079, "children": 20179, "women": 12500}
+]
 ```
 
 ## 🚀 Deployment
 
 The project runs entirely on GitHub:
 
-- GitHub Actions handles hourly automation
+- GitHub Actions handles the automated updates daily
 - GitHub renders the README with the updated badges
+- GitHub Pages serves the live dashboard at https://sharifder.github.io/Gaza-Genocide/
 - Zero hosting costs, zero infrastructure
 
 See `DEPLOYMENT_GUIDE.md` for the exact steps.
@@ -117,13 +162,14 @@ See `DEPLOYMENT_GUIDE.md` for the exact steps.
 
 ```mermaid
 graph TD
-    A[GitHub Actions Trigger<br/>hourly or manual] --> B[fetch_statistics.py<br/>TfP Palestine Datasets API]
+    A[GitHub Actions Trigger<br/>every day or manual] --> B[fetch_statistics.py<br/>TfP Palestine Datasets API]
     B --> C{API reachable?}
-    C -->|yes| D[Write data/latest_stats.json]
-    C -->|no| E[Keep existing data/latest_stats.json]
+    C -->|yes| D[Write data/latest_stats.json<br/>+ data/history.json]
+    C -->|no| E[Keep existing data]
     D --> F[update_badges.py]
-    F --> G[README badges + table updated]
+    F --> G[README badges + table updated<br/>index.html + ar.html generated]
     G --> H[Commit and push]
+    H --> I[GitHub Pages serves updated dashboard]
 ```
 
 ## 🛠️ Development Setup

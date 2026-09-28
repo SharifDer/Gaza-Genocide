@@ -15,9 +15,9 @@
   "west_bank_children_killed": "240+",
   "known_named_victims": "72,835+",
   "last_data_update": "2026-09-27",
-  "last_updated": "2026-09-28 06:54 UTC",
+  "last_updated": "2026-09-28 13:59 UTC",
   "days_of_conflict": 1087,
-  "fetch_timestamp": "2026-09-28T06:54:14.251890",
+  "fetch_timestamp": "2026-09-28T13:59:35.358473",
   "source": "Tech for Palestine - Palestine Datasets (Gaza MoH / UN OCHA)",
   "source_url": "https://data.techforpalestine.org/api/v3/summary.json",
   "sources": [
@@ -26,6 +26,6 @@
     "UN OCHA",
     "WHO"
   ],
-  "update_frequency": "hourly",
+  "update_frequency": "daily",
   "data_verification": "cross-referenced by Tech for Palestine"
 }
