@@ -13,13 +13,13 @@
 ### Circular Statistics Badges
 
 
-[![Death Toll](https://img.shields.io/badge/Death%20Toll-74,016%2B-red?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Death Toll](https://img.shields.io/badge/Death%20Toll-74,018%2B-red?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Children Killed](https://img.shields.io/badge/Children%20Killed-20,179%2B-orange?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Women Killed](https://img.shields.io/badge/Women%20Killed-12,500%2B-purple?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Injured](https://img.shields.io/badge/Injured-175,068%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Injured](https://img.shields.io/badge/Injured-175,079%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Hospitals](https://img.shields.io/badge/Hospitals%20Operational-15/36-green?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-28%2000:46%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-09-28%2006:54%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -50,12 +50,12 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 | Category | LIVE COUNT | Last Updated | Status |
 |----------|------------|--------------|--------|
-| Total Deaths | 74,016+ | 2026-09-28 00:46 UTC | 🔴 LIVE |
-| Children Killed | 20,179+ | 2026-09-28 00:46 UTC | 🟠 LIVE |
-| Women Killed | 12,500+ | 2026-09-28 00:46 UTC | 🔴 LIVE |
-| Injured | 175,068+ | 2026-09-28 00:46 UTC | 🟡 LIVE |
-| Displaced | 1.9M+ | 2026-09-28 00:46 UTC | 🔵 LIVE |
-| Hospitals | 15/36 | 2026-09-28 00:46 UTC | 🟢 LIVE |
+| Total Deaths | 74,018+ | 2026-09-28 06:54 UTC | 🔴 LIVE |
+| Children Killed | 20,179+ | 2026-09-28 06:54 UTC | 🟠 LIVE |
+| Women Killed | 12,500+ | 2026-09-28 06:54 UTC | 🔴 LIVE |
+| Injured | 175,079+ | 2026-09-28 06:54 UTC | 🟡 LIVE |
+| Displaced | 1.9M+ | 2026-09-28 06:54 UTC | 🔵 LIVE |
+| Hospitals | 15/36 | 2026-09-28 06:54 UTC | 🟢 LIVE |
 
 ---
 
@@ -223,7 +223,7 @@ This documentation is released under [Creative Commons Attribution 4.0 Internati
 
 ---
 
-**Last Updated**: 2026-09-28 00:46 UTC
+**Last Updated**: 2026-09-28 06:54 UTC
 
 **Star this repo** ⭐ to help spread awareness and keep this documentation visible.
 
