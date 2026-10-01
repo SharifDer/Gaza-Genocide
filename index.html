@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaza Casualty Tracker — Live Verified Statistics | 74,023+ Killed</title>
-<meta name="description" content="Live, verified Gaza casualty statistics: 74,023+ killed, 20,179+ children, 175,111+ injured. Data from the Gaza Ministry of Health via Tech for Palestine, updated automatically.">
+<title>Gaza Casualty Tracker — Live Verified Statistics | 74,032+ Killed</title>
+<meta name="description" content="Live, verified Gaza casualty statistics: 74,032+ killed, 20,179+ children, 175,142+ injured. Data from the Gaza Ministry of Health via Tech for Palestine, updated automatically.">
 <link rel="canonical" href="https://sharifder.github.io/Gaza-Genocide/">
 <link rel="alternate" hreflang="en" href="https://sharifder.github.io/Gaza-Genocide/">
 <link rel="alternate" hreflang="ar" href="https://sharifder.github.io/Gaza-Genocide/ar.html">
@@ -12,13 +12,13 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Gaza Casualty Tracker — Live Verified Statistics">
-<meta property="og:description" content="74,023+ killed, 20,179+ children, 175,111+ injured. Verified data, updated automatically.">
+<meta property="og:description" content="74,032+ killed, 20,179+ children, 175,142+ injured. Verified data, updated automatically.">
 <meta property="og:url" content="https://sharifder.github.io/Gaza-Genocide/">
 <meta property="og:site_name" content="Gaza Casualty Tracker">
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gaza Casualty Tracker — Live Verified Statistics">
-<meta name="twitter:description" content="74,023+ killed, 20,179+ children. Verified data, updated automatically.">
+<meta name="twitter:description" content="74,032+ killed, 20,179+ children. Verified data, updated automatically.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,14 +87,14 @@
   <div class="hero">
     <h1>Live Verified Statistics from Gaza</h1>
     <p>Real casualty figures from the Gaza Ministry of Health daily reports, aggregated by Tech for Palestine and cross-referenced with UN OCHA. No estimates. No extrapolation. Updated automatically.</p>
-    <span class="live-pill">Data through 2026-09-29 · updated 2026-09-30 09:43 UTC</span>
+    <span class="live-pill">Data through 2026-09-30 · updated 2026-10-01 10:09 UTC</span>
   </div>
 
   <div class="cards">
-    <div class="card"><div class="num">74,023+</div><div class="lbl">People Killed</div></div>
+    <div class="card"><div class="num">74,032+</div><div class="lbl">People Killed</div></div>
     <div class="card"><div class="num">20,179+</div><div class="lbl">Children Killed</div></div>
     <div class="card"><div class="num">12,500+</div><div class="lbl">Women Killed</div></div>
-    <div class="card"><div class="num">175,111+</div><div class="lbl">Injured</div></div>
+    <div class="card"><div class="num">175,142+</div><div class="lbl">Injured</div></div>
     <div class="card"><div class="num">262+</div><div class="lbl">Journalists Killed</div></div>
     <div class="card"><div class="num">1,701+</div><div class="lbl">Medical Staff Killed</div></div>
     <div class="card"><div class="num">12,000+</div><div class="lbl">Massacres</div></div>
@@ -105,7 +105,7 @@
   <section>
     <h2>📈 Cumulative Toll Since October 7, 2023</h2>
     <div class="chart-box"><canvas id="trendChart" height="120"></canvas></div>
-    <p class="note">Full daily series from the Tech for Palestine casualties dataset (1089 days of conflict).</p>
+    <p class="note">Full daily series from the Tech for Palestine casualties dataset (1090 days of conflict).</p>
   </section>
 
   <section>
@@ -117,7 +117,7 @@
     <h2>❓ Frequently Asked Questions</h2>
     <dl class="faq">
       <dt>How many people have been killed in Gaza?</dt>
-      <dd>As of 2026-09-29, the Gaza Ministry of Health reports 74,023+ people killed, including 20,179+ children and 12,500+ women, with 175,111+ more injured.</dd>
+      <dd>As of 2026-09-30, the Gaza Ministry of Health reports 74,032+ people killed, including 20,179+ children and 12,500+ women, with 175,142+ more injured.</dd>
       <dt>Where does this data come from?</dt>
       <dd>From the Gaza Ministry of Health's daily reports, aggregated and published in machine-readable form by <a href="https://data.techforpalestine.org">Tech for Palestine</a>, cross-referenced with UN OCHA figures.</dd>
       <dt>Are these numbers accurate?</dt>
@@ -168,7 +168,7 @@ fetch("data/history.json").then(r => r.json()).then(history => {
   });
 });
 
-const N_CHILDREN = 20179, N_WOMEN = 12500, N_KILLED = 74023;
+const N_CHILDREN = 20179, N_WOMEN = 12500, N_KILLED = 74032;
 new Chart(document.getElementById("breakdownChart"), {
   type: "doughnut",
   data: {
