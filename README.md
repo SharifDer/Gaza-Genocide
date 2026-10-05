@@ -17,15 +17,15 @@
 ### Statistics Badges
 
 
-[![Death Toll](https://img.shields.io/badge/Death%20Toll-74,228%2B-red?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Death Toll](https://img.shields.io/badge/Death%20Toll-74,243%2B-red?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Children Killed](https://img.shields.io/badge/Children%20Killed-20,179%2B-orange?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Women Killed](https://img.shields.io/badge/Women%20Killed-12,500%2B-purple?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Injured](https://img.shields.io/badge/Injured-175,188%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Injured](https://img.shields.io/badge/Injured-175,232%2B-yellow?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Journalists Killed](https://img.shields.io/badge/Journalists%20Killed-262%2B-critical?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Medical Staff Killed](https://img.shields.io/badge/Medical%20Staff%20Killed-1,701%2B-lightgrey?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Hospitals](https://img.shields.io/badge/Hospitals%20Operational-15/36-green?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-10-04%2009:49%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-10-05%2010:28%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -58,14 +58,14 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 | Category | LIVE COUNT | Last Updated | Status |
 |----------|------------|--------------|--------|
-| Total Deaths | 74,228+ | 2026-10-04 09:49 UTC | 🔴 LIVE |
-| Children Killed | 20,179+ | 2026-10-04 09:49 UTC | 🟠 LIVE |
-| Women Killed | 12,500+ | 2026-10-04 09:49 UTC | 🔴 LIVE |
-| Injured | 175,188+ | 2026-10-04 09:49 UTC | 🟡 LIVE |
-| Journalists Killed | 262+ | 2026-10-04 09:49 UTC | ⚫ LIVE |
-| Medical Staff Killed | 1,701+ | 2026-10-04 09:49 UTC | ⚪ LIVE |
-| Displaced | 1.9M+ | 2026-10-04 09:49 UTC | 🔵 LIVE |
-| Hospitals | 15/36 | 2026-10-04 09:49 UTC | 🟢 LIVE |
+| Total Deaths | 74,243+ | 2026-10-05 10:28 UTC | 🔴 LIVE |
+| Children Killed | 20,179+ | 2026-10-05 10:28 UTC | 🟠 LIVE |
+| Women Killed | 12,500+ | 2026-10-05 10:28 UTC | 🔴 LIVE |
+| Injured | 175,232+ | 2026-10-05 10:28 UTC | 🟡 LIVE |
+| Journalists Killed | 262+ | 2026-10-05 10:28 UTC | ⚫ LIVE |
+| Medical Staff Killed | 1,701+ | 2026-10-05 10:28 UTC | ⚪ LIVE |
+| Displaced | 1.9M+ | 2026-10-05 10:28 UTC | 🔵 LIVE |
+| Hospitals | 15/36 | 2026-10-05 10:28 UTC | 🟢 LIVE |
 
 ---
 
@@ -246,7 +246,7 @@ This documentation is released under [Creative Commons Attribution 4.0 Internati
 
 ---
 
-**Last Updated**: 2026-10-04 09:49 UTC
+**Last Updated**: 2026-10-05 10:28 UTC
 
 **Star this repo** ⭐ to help spread awareness and keep this documentation visible.
 
