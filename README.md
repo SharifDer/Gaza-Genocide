@@ -25,7 +25,7 @@
 [![Medical Staff Killed](https://img.shields.io/badge/Medical%20Staff%20Killed-1,701%2B-lightgrey?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Displaced](https://img.shields.io/badge/Displaced-1.9M%2B-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 [![Hospitals](https://img.shields.io/badge/Hospitals%20Operational-15/36-green?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-10-08%2010:36%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026-10-09%2010:34%20UTC-blue?style=for-the-badge)](https://github.com/SharifDer/Gaza-Genocide)
 
 ---
 
@@ -58,14 +58,14 @@ The Gaza Strip, home to 2.3 million people, is experiencing an unprecedented hum
 
 | Category | LIVE COUNT | Last Updated | Status |
 |----------|------------|--------------|--------|
-| Total Deaths | 74,250+ | 2026-10-08 10:36 UTC | 🔴 LIVE |
-| Children Killed | 20,179+ | 2026-10-08 10:36 UTC | 🟠 LIVE |
-| Women Killed | 12,500+ | 2026-10-08 10:36 UTC | 🔴 LIVE |
-| Injured | 175,278+ | 2026-10-08 10:36 UTC | 🟡 LIVE |
-| Journalists Killed | 262+ | 2026-10-08 10:36 UTC | ⚫ LIVE |
-| Medical Staff Killed | 1,701+ | 2026-10-08 10:36 UTC | ⚪ LIVE |
-| Displaced | 1.9M+ | 2026-10-08 10:36 UTC | 🔵 LIVE |
-| Hospitals | 15/36 | 2026-10-08 10:36 UTC | 🟢 LIVE |
+| Total Deaths | 74,250+ | 2026-10-09 10:34 UTC | 🔴 LIVE |
+| Children Killed | 20,179+ | 2026-10-09 10:34 UTC | 🟠 LIVE |
+| Women Killed | 12,500+ | 2026-10-09 10:34 UTC | 🔴 LIVE |
+| Injured | 175,278+ | 2026-10-09 10:34 UTC | 🟡 LIVE |
+| Journalists Killed | 262+ | 2026-10-09 10:34 UTC | ⚫ LIVE |
+| Medical Staff Killed | 1,701+ | 2026-10-09 10:34 UTC | ⚪ LIVE |
+| Displaced | 1.9M+ | 2026-10-09 10:34 UTC | 🔵 LIVE |
+| Hospitals | 15/36 | 2026-10-09 10:34 UTC | 🟢 LIVE |
 
 ---
 
@@ -246,7 +246,7 @@ This documentation is released under [Creative Commons Attribution 4.0 Internati
 
 ---
 
-**Last Updated**: 2026-10-08 10:36 UTC
+**Last Updated**: 2026-10-09 10:34 UTC
 
 **Star this repo** ⭐ to help spread awareness and keep this documentation visible.
 
